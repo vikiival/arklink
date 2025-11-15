@@ -43,7 +43,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({
       cursor: results.cursor,    
       hasNextPage: results.hasNextPage,
-      data: results.entities.map(e => e.toJson()).at(0),
+      data: results.entities.map(e => e.toJson()).at(-1),
     });
 
   } catch (error) {
