@@ -32,6 +32,18 @@ export type Memo = {
   expiresAt: string;
 };
 
+export type SocialLink = {
+  platform: string;
+  handle: string;
+  href: string;
+};
+
+export type ProfileHeader = {
+  name: string;
+  bio: string;
+  avatar: string;
+};
+
 // API Error Response
 export type APIError = {
   error: string;
