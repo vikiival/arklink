@@ -1,0 +1,91 @@
+# Ark Link
+
+A modern decentralized ephemeral link management
+
+## 🚀 Features
+
+**Coming Soon**
+
+## 🔗 Tech Stack
+
+- **Dedot** - a Polkadot SDK APIs for interacting with Polkadot-based blockchains.
+- **Arkiv** - a decentralized ephemral storage on top of Ethereum
+
+
+### Configuration Files:
+- **`app/utils/sdk.ts`** - Configures which chains to connect to and manages chain endpoints. You can modify supported networks and RPC providers here.
+- **`app/utils/sdk-interface.ts`** - Provides high-level functions for onchain SDK calls.
+
+## 🌐 Supported Chains
+
+The template comes pre-configured for:
+- **Polkadot** (DOT) - Main network
+- **Polkadot Asset Hub** - Asset management
+- **Paseo** (PAS) - Testnet
+- **Paseo Asset Hub** - Testnet asset management
+
+## 🛠️ Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
+```
+
+## 📁 Project Structure
+
+```
+app/
+├── components/     # React components
+├── hooks/          # Custom React hooks
+├── utils/          # Utility functions and SDK setup
+├── globals.css     # Global styles
+├── layout.tsx      # Root layout component
+└── page.tsx        # Main page component
+```
+
+## 🔧 Adding Custom Networks
+
+To add more networks or change RPC providers, edit `app/utils/sdk.ts`:
+
+```typescript
+import type { YourChainApi } from '@dedot/chaintypes'
+
+const CONFIG = {
+  // ... existing chains
+  your_chain: {
+    providers: ['wss://your-rpc-endpoint.io'],
+    apiType: {} as YourChainApi,
+  },
+}
+```
+
+You can add multiple RPC endpoints for fallback support:
+
+```typescript
+const CONFIG = {
+  dot: {
+    providers: [
+      'wss://rpc.polkadot.io',
+      'wss://polkadot-rpc.dwellir.com'
+    ],
+    apiType: {} as PolkadotApi,
+  },
+}
+```
+
+📖 For more details on connecting to networks, see the [Dedot documentation](https://docs.dedot.dev/getting-started/connect-to-network).
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Dedot Documentation](https://docs.dedot.dev/)
+- [Polkadot Developer Portal](https://wiki.polkadot.network/)
