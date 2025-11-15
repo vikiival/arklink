@@ -9,9 +9,12 @@
     "lint": "eslint --fix ."
   },
   "dependencies": {
+    "@arkiv-network/sdk": "^0.4.4",
+    "@kodadot1/minipfs": "0.5.1-rc.1",
     "@talismn/connect-wallets": "^1.2.8",
     "@xstate/store": "^3.11.2",
     "dedot": "^0.18.5",
+    "ethers": "^6.15.0",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"
