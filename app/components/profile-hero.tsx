@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { defaultProfileHeader } from '../data/profile'
+
 type BadgeTone = 'primary' | 'secondary'
 
 const badgeToneMap: Record<BadgeTone, string> = {
@@ -13,6 +15,7 @@ type ProfileHeroProps = {
   description: string
   avatarSize?: number
   badgeTone?: BadgeTone
+  avatarUrl?: string
 }
 
 export default function ProfileHero({
@@ -21,7 +24,10 @@ export default function ProfileHero({
   description,
   avatarSize = 128,
   badgeTone = 'primary',
+  avatarUrl,
 }: ProfileHeroProps) {
+  const resolvedAvatar = avatarUrl ?? defaultProfileHeader.avatar
+
   return (
     <div className="flex flex-col items-center text-center px-4 gap-6">
       <div className="avatar">
@@ -30,8 +36,8 @@ export default function ProfileHero({
           style={{ width: avatarSize, height: avatarSize }}
         >
           <Image
-            src="https://github.com/vikiival.png"
-            alt="Viki Val"
+            src={resolvedAvatar}
+            alt={name}
             width={avatarSize}
             height={avatarSize}
             priority
