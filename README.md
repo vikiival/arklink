@@ -1,6 +1,6 @@
 # Ark Link
 
-A modern decentralized ephemeral link management
+A very modern decentralized ephemeral link management
 
 ## 🚀 Features
 
