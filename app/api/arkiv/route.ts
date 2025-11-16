@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 const walletClient = createWalletClient({
   chain: mendoza,
   transport: http(),
-  account: privateKeyToAccount(`0x00`)//process.env.PRIVATE_KEY as Address),
+  account: privateKeyToAccount(process.env.PRIVATE_KEY as Address),
 })
 
 
