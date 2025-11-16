@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
       image,
       mint: rawData.mint,
       createdAt: rawData.created_at,
-      expiresAt: rawData.expires_at,
+      expiresAt: rawData.expires_at
     };
 
     return NextResponse.json(memo);

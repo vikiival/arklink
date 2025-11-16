@@ -16,6 +16,7 @@ type ProfileHeroProps = {
   avatarSize?: number
   badgeTone?: BadgeTone
   avatarUrl?: string
+  unoptimizedAvatar?: boolean
 }
 
 export default function ProfileHero({
@@ -25,6 +26,7 @@ export default function ProfileHero({
   avatarSize = 128,
   badgeTone = 'primary',
   avatarUrl,
+  unoptimizedAvatar = false,
 }: ProfileHeroProps) {
   const resolvedAvatar = avatarUrl ?? defaultProfileHeader.avatar
 
@@ -41,6 +43,7 @@ export default function ProfileHero({
             width={avatarSize}
             height={avatarSize}
             priority
+            unoptimized={unoptimizedAvatar}
           />
         </div>
       </div>
