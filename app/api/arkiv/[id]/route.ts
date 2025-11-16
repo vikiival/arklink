@@ -13,10 +13,10 @@ const publicClient = createPublicClient({
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    // const { searchParams } = new URL(request.url);
-    // const code = searchParams.get('code');
+    const { searchParams } = new URL(request.url);
+    const code = searchParams.get('code');
 
-    if (!id) {
+    if (!code) {
       return NextResponse.json(
         { error: "Code parameter is required" },
         { status: 400 }
@@ -26,8 +26,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const query = publicClient.buildQuery()
     const results: QueryResult = await query
       .where(eq('type', 'arklink'))
-      // .where(eq('address', id))
-      .where(eq('$owner', id))
+      .where(eq('handle', id))
+      .where(eq('encrypted', 'aes-256-gcm'))
+      // .where(eq('$owner', id))
       .withPayload(true)
       .withAttributes(true)
       .fetch()
@@ -42,15 +43,15 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     const entities = results.entities.map(e => {
       const hasEncption = e.attributes.find(attr => attr.key === 'encrypted')
-      const payload = hasEncption ? decrypt(e.toText(), id) : e.toText()
+      const payload = hasEncption ? decrypt(e.toText(), code) : e.toText()
 
-      return JSON.parse(payload)
+      return payload
     }) 
 
     return NextResponse.json({
       cursor: results.cursor,    
       hasNextPage: results.hasNextPage,
-      data: results.entities.map(e => e.toJson()).at(0),
+      data: entities.at(-1),
     });
 
   } catch (error) {

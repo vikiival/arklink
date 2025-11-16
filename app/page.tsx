@@ -25,8 +25,9 @@ type ProfileResult = {
 }
 
 export default async function Home({ searchParams }: PageProps) {
-  const resolvedHandle = resolveHandle(await searchParams)
-  const { socials, header, fallbackNotice } = await fetchProfile(resolvedHandle)
+  const p = await searchParams
+  const resolvedHandle = resolveHandle(p)
+  const { socials, header, fallbackNotice } = await fetchProfile(resolvedHandle, p?.code as string)
 
   return (
     <div className="min-h-screen flex flex-col bg-base-200">
@@ -60,7 +61,7 @@ function resolveHandle(searchParams?: Record<string, string | string[] | undefin
   return param && param.trim().length > 0 ? param.trim() : 'vikiival'
 }
 
-async function fetchProfile(handle: string): Promise<ProfileResult> {
+async function fetchProfile(handle: string, code: string): Promise<ProfileResult> {
   const fallbackResult: ProfileResult = {
     socials: defaultSocialLinks,
     header: defaultProfileHeader,
@@ -69,7 +70,8 @@ async function fetchProfile(handle: string): Promise<ProfileResult> {
 
   try {
     const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/api/u/${encodeURIComponent(handle)}`, {
+    const r = code ? 'arkiv' : 'u' 
+    const response = await fetch(`${baseUrl}/api/${r}/${encodeURIComponent(handle)}?code=${code}`, {
       cache: 'no-store',
     })
 
