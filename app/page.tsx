@@ -112,11 +112,11 @@ function hydrateHeader(header?: Partial<ProfileHeader>): ProfileHeader {
 
 function getBaseUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')
+    return 'https://arkl.vercel.app' //process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')
   }
 
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
+    return 'https://arkl.vercel.app' // `https://${process.env.VERCEL_URL}`
   }
 
   return 'http://127.0.0.1:3000'
