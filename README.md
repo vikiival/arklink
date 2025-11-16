@@ -1,91 +1,81 @@
 # Ark Link
 
-A very modern decentralized ephemeral link management
+A decentralized, encrypted take on Linktree. Every profile bundles social and Web3 actions into a single shareable page while the underlying data lives on Arkiv Network with AES-256-GCM encryption. A matching key is stored off-chain on NFC badges, so creators can gate ownership or updates to whoever physically holds the credential.
 
 ## 🚀 Features
 
-**Coming Soon**
+- **Decentralized storage.** Social link payloads and profile metadata live on Arkiv Network so creators own the data end to end.
+- **Encryption-first design.** Payloads are secured with AES-256-GCM and keys live on NFC badges so only badge holders can publish or update.
+- **Responsive Linktree UI.** Hero section, tabbed link stack (Socials/Web3), POAP claim page, and polished DaisyUI layout tuned for mobile and desktop.
+- **Dynamic profiles.** Visiting `/?u=<handle>` resolves profile and header data live from the encrypted payload, letting attendees host their own “decentralized Linktree”.
 
 ## 🔗 Tech Stack
 
-- **Dedot** - a Polkadot SDK APIs for interacting with Polkadot-based blockchains.
-- **Arkiv** - a decentralized ephemral storage on top of Ethereum
+- **Next.js 16 / React 19** for the app shell and dynamic routing.
+- **Tailwind CSS + DaisyUI + Iconify** for theming, responsive layout, and iconography.
+- **Arkiv Network** for ephemeral decentralized storage with attribute queries.
+- **Dedot** to underpin any future onchain interactions (Polkadot-focused SDK already scaffolded).
+- **AES-256-GCM cipher utilities** in `lib/ciphers.ts` handle payload encryption/decryption.
 
-
-### Configuration Files:
-- **`app/utils/sdk.ts`** - Configures which chains to connect to and manages chain endpoints. You can modify supported networks and RPC providers here.
-- **`app/utils/sdk-interface.ts`** - Provides high-level functions for onchain SDK calls.
-
-## 🌐 Supported Chains
-
-The template comes pre-configured for:
-- **Polkadot** (DOT) - Main network
-- **Polkadot Asset Hub** - Asset management
-- **Paseo** (PAS) - Testnet
-- **Paseo Asset Hub** - Testnet asset management
+### Relevant Files
+- `app/page.tsx` – Server component that fetches profile data (header + socials) and renders the hero/link tree.
+- `app/components/account-tree.tsx` – Tabbed link list (Socials/Web3) with DaisyUI cards.
+- `app/components/profile-hero.tsx` – Reusable profile hero with avatar, badge, name, and bio copy.
+- `app/memo/page.tsx` – POAP claim experience for “Mint Meet Memo”.
+- `app/data/profile.ts` – Default profile header/socials used when no data is available.
+- `lib/ciphers.ts` – AES-256-GCM helpers for encrypting data saved to Arkiv.
 
 ## 🛠️ Getting Started
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
-# Start development server
-npm run dev
+# Start dev server
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 
-# Start production server
-npm run start
+# Run production preview
+pnpm start
 ```
+
+Create a `.env.local` with any required secrets (e.g., `NEXT_PUBLIC_SITE_URL`, Arkiv credentials) before running commands above.
 
 ## 📁 Project Structure
 
 ```
 app/
-├── components/     # React components
-├── hooks/          # Custom React hooks
-├── utils/          # Utility functions and SDK setup
-├── globals.css     # Global styles
-├── layout.tsx      # Root layout component
-└── page.tsx        # Main page component
+├── components/     # UI building blocks (header, account tree, etc.)
+├── data/           # Default profile metadata
+├── hooks/          # Wallet/connect utilities
+├── utils/          # SDK helpers and formatters
+├── layout.tsx      # Root layout
+└── page.tsx        # Profile landing page
+lib/
+├── ciphers.ts      # AES-256-GCM encrypt/decrypt helpers
+└── types.ts        # Shared DTO + profile types
+app/api/            # Route handlers (memo, arkiv/u endpoints, etc.)
 ```
 
-## 🔧 Adding Custom Networks
+## 🧠 How It Works
 
-To add more networks or change RPC providers, edit `app/utils/sdk.ts`:
+1. A creator registers a profile and social payload.
+2. Payload is encrypted with AES-256-GCM; the key is written to an NFC badge.
+3. Encrypted payload + attributes are stored via Arkiv Network.
+4. Visiting `/?u=<handle>` queries `/api/u/:handle`, decrypts payload (server-side), and streams socials/header data to the UI.
+5. Frontend renders the hero, social tab, Web3 tab, and memo experience with DaisyUI components.
 
-```typescript
-import type { YourChainApi } from '@dedot/chaintypes'
+## ✅ Milestone 1 Outcomes
 
-const CONFIG = {
-  // ... existing chains
-  your_chain: {
-    providers: ['wss://your-rpc-endpoint.io'],
-    apiType: {} as YourChainApi,
-  },
-}
-```
-
-You can add multiple RPC endpoints for fallback support:
-
-```typescript
-const CONFIG = {
-  dot: {
-    providers: [
-      'wss://rpc.polkadot.io',
-      'wss://polkadot-rpc.dwellir.com'
-    ],
-    apiType: {} as PolkadotApi,
-  },
-}
-```
-
-📖 For more details on connecting to networks, see the [Dedot documentation](https://docs.dedot.dev/getting-started/connect-to-network).
+- Delivered decentralized Linktree UI with social/Web3 tabs and dynamic profile resolution.
+- Integrated Arkiv storage read APIs (encrypted payload fetches).
+- Built “Mint Meet Memo” POAP claim flow with custom badge artwork.
+- Documented cipher utilities so encrypted payloads can be created/updated.
 
 ## 📚 Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Dedot Documentation](https://docs.dedot.dev/)
-- [Polkadot Developer Portal](https://wiki.polkadot.network/)
+- [Arkiv Network](https://arkiv.network/)
+- [Dedot Docs](https://docs.dedot.dev/)
+- [Next.js Docs](https://nextjs.org/docs)
