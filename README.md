@@ -6,6 +6,7 @@ A decentralized, encrypted take on Linktree. Every profile bundles social and We
 
 - **Decentralized storage.** Social link payloads and profile metadata live on Arkiv Network so creators own the data end to end.
 - **Encryption-first design.** Payloads are secured with AES-256-GCM and keys live on NFC badges so only badge holders can publish or update.
+- **Ephemeral by default.** Arkiv entities are configured to expire after the conference window, protecting privacy and ensuring no stale data lingers on-chain.
 - **Responsive Linktree UI.** Hero section, tabbed link stack (Socials/Web3), POAP claim page, and polished DaisyUI layout tuned for mobile and desktop.
 - **Dynamic profiles.** Visiting `/?u=<handle>` resolves profile and header data live from the encrypted payload, letting attendees host their own “decentralized Linktree”.
 
@@ -64,7 +65,7 @@ app/api/            # Route handlers (memo, arkiv/u endpoints, etc.)
 1. A creator registers a profile and social payload.
 2. Payload is encrypted with AES-256-GCM; the key is written to an NFC badge.
 3. Encrypted payload + attributes are stored via Arkiv Network.
-4. Visiting `/?u=<handle>` queries `/api/u/:handle`, decrypts payload (server-side), and streams socials/header data to the UI.
+4. Visiting `/?u=<handle>` queries `/api/u/:handle`, decrypts payload (server-side), and streams socials/header data to the UI until the Arkiv TTL expires.
 5. Frontend renders the hero, social tab, Web3 tab, and memo experience with DaisyUI components.
 
 ## ✅ Milestone 1 Outcomes

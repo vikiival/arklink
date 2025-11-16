@@ -12,10 +12,12 @@
 - Delivered a decentralized Linktree UI that hydrates profile hero + social tabs from Arkiv-stored payloads resolved via `/?u=<handle>`.
 - Encrypted every payload with AES-256-GCM and linked the symmetric keys to NFC conference badges for physical custody.
 - Built the Mint Meet Memo POAP claim experience plus the Web3 tab actions (Nova Wallet tip + memo mint).
+- Made every profile ephemeral by default by setting Arkiv expirations to the conference window for privacy + automatic cleanup.
 
 **What's working:**
 - Dynamic read path from `/api/u/:handle` that renders Social + Web3 tabs responsively.
 - Encrypted storage on Arkiv with NFC-bound keys, ensuring only badge holders can own/update their profile.
+- Expiring Arkiv payloads post-conference so users get privacy + protection without manual cleanup.
 
 **What still needs work:**
 - No creator-friendly way to publish a new profile (missing create form + encryption UX).
