@@ -8,9 +8,9 @@ export default function Header() {
       <div className="container mx-auto flex items-center">
         <div className="navbar-start">
           <a href="https://polkadot.com" target="_blank" className="flex items-center" rel="noopener noreferrer">
-            <span className="icon-[token-branded--polkadot] text-2xl" />
+            {/* <span className="icon-[token-branded--polkadot] text-2xl" /> */}
             <span className="text-xl font-bold font-mono text-black tracking-wide ml-1">
-              ark link
+              [ark] link
             </span>
           </a>
         </div>
