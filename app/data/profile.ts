@@ -8,23 +8,24 @@ export const defaultProfileHeader: ProfileHeader = {
 
 export const defaultSocialLinks: SocialLink[] = [
   {
-    platform: 'GitHub',
+    platform: 'telegram',
     handle: '@vikiival',
-    href: 'https://github.com/vikiival',
+    href: 'https://t.me/vikiival',
   },
   {
-    platform: 'X (Twitter)',
+    platform: 'twitter',
     handle: '@vikiival',
     href: 'https://x.com/vikiival',
   },
   {
-    platform: 'LinkedIn',
+    platform: 'github',
+    handle: '@vikiival',
+    href: 'https://github.com/vikiival',
+  },
+
+  {
+    platform: 'linkedin',
     handle: 'vikival',
     href: 'https://www.linkedin.com/in/vikival/',
-  },
-  {
-    platform: 'Instagram',
-    handle: '@imrkva',
-    href: 'https://www.instagram.com/imrkva/',
   },
 ]
